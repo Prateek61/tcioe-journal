@@ -30,10 +30,11 @@ const DropdownContent = styled.div`
   background-color: white;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
   z-index: 1;
-  min-width: 160px;
+  width: 20rem;
   border-radius: 4px;
   padding: 0.5rem;
   color: black;
+  transition: 0.5s ease-in-out;
 `;
 
 const DropdownOption = styled.div`
@@ -61,8 +62,8 @@ justify-content: center;
     ${DropdownContent} {
       display: flex;
       flex-direction: column;
-      top: 2rem;
-      left: -.3rem;
+      top: 4rem;
+      left: 0rem;
     }
 }
 
