@@ -1,11 +1,6 @@
 "use client";
 
 import styled from "styled-components";
-import { IoIosArrowDown } from "react-icons/io";
-import { MdOutlineArrowOutward } from "react-icons/md";
-import { FiMenu } from "react-icons/fi";
-import { ImCross } from "react-icons/im";
-import { VscBlank } from "react-icons/vsc";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 

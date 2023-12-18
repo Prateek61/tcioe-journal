@@ -2,10 +2,28 @@
 
 import React, { useState, useEffect } from "react";
 import { FaRegFilePdf } from "react-icons/fa";
+import styled from "styled-components";
 import { ArticleBody, ArticlePosition, ArticleLists, Line, IndividualCard, PDFLink } from "@/components/ArticleCardStyles";
+
+const ViewButton = styled.div`
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+  padding-left: 1rem;
+  background-color: #e0e0e0;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+
+  // width enough to fit the text
+  width: fit-content;
+
+  &:active {
+    color: red;
+}`;
 
 const Page = ({ params }) => {
   const [articles, setArticles] = useState([]);
+  const [showAllArticles, setShowAllArticles] = useState(false);
   const { volume, issue } = params;
 
   useEffect(() => {
@@ -42,6 +60,14 @@ const Page = ({ params }) => {
     fetchData();
   }, [volume, issue]);
 
+  const handleShowMore = () => {
+    setShowAllArticles(true);
+  };
+
+  const handleShowLess = () => {
+    setShowAllArticles(false);
+  };
+
   return (
     <>
       <ArticleBody>
@@ -49,7 +75,8 @@ const Page = ({ params }) => {
         {issue && <h3>Issue {issue}</h3>}
         <Line width={"70px"} />
         <ArticlePosition>
-          {articles?.map((article) => (
+        {articles.slice(0, showAllArticles ? articles.length : 9).map(
+            (article) => (
             <ArticleLists key={article.id}>
               <IndividualCard>
                 <p>
@@ -68,6 +95,15 @@ const Page = ({ params }) => {
             </ArticleLists>
           ))}
         </ArticlePosition>
+        {articles.length > 9 && (
+          <>
+            {showAllArticles ? (
+              <ViewButton onClick={handleShowLess}>Show Less</ViewButton>
+            ) : (
+              <ViewButton onClick={handleShowMore}>Show More</ViewButton>
+            )}
+          </>
+        )}
       </ArticleBody>
     </>
   );

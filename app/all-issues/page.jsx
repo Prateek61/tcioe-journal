@@ -6,8 +6,25 @@ import { FaRegFilePdf } from "react-icons/fa";
 
 import { ArticleBody, ArticlePosition, ArticleLists, Line, IndividualCard, PDFLink } from "@/components/ArticleCardStyles";
 
+const ViewButton = styled.div`
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+  padding-left: 1rem;
+  background-color: #e0e0e0;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+
+  // width enough to fit the text
+  width: fit-content;
+
+  &:active {
+    color: red;
+}`;
+
 const VolumePage = () => {
   const [articlesByVolume, setArticlesByVolume] = useState({});
+  const [showAllArticles, setShowAllArticles] = useState({});
 
   useEffect(() => {
     const fetchData = async () => {
@@ -27,6 +44,7 @@ const VolumePage = () => {
         });
 
         setArticlesByVolume(articlesGroupedByVolume);
+        setShowAllArticles(Object.fromEntries(Object.keys(articlesGroupedByVolume).map(volume => [volume, false])));
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -34,6 +52,10 @@ const VolumePage = () => {
 
     fetchData();
   }, []);
+
+  const handleReadMore = (volume) => {
+    setShowAllArticles(prevState => ({ ...prevState, [volume]: !prevState[volume] }));
+  };
 
   return (
     <>
@@ -43,7 +65,7 @@ const VolumePage = () => {
             <h2>Volume {volume}</h2>
             <Line width={"70px"} />
             <ArticlePosition>
-              {articlesByVolume[volume].map((article) => (
+            {articlesByVolume[volume].slice(0, showAllArticles[volume] ? articlesByVolume[volume].length : 3).map((article) => (
                 <ArticleLists key={article.id}>
                   <IndividualCard>
                     <p>
@@ -66,6 +88,11 @@ const VolumePage = () => {
                 </ArticleLists>
               ))}
             </ArticlePosition>
+            {articlesByVolume[volume].length > 3 && (
+              <ViewButton onClick={() => handleReadMore(volume)}>
+                {showAllArticles[volume] ? "Show Less" : "Show More"}
+              </ViewButton>
+            )}
           </div>
         ))}
       </ArticleBody>
