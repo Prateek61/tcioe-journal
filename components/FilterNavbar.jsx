@@ -13,7 +13,7 @@ import { useState, useEffect } from "react";
 const ContainerFull = styled.div`
 border-bottom-color: black;
 display: flex;
-margin-top: 1rem;
+//margin-top: 1rem;
 width: 100 hw;  
 height: 4rem;
 box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.09), 0 6px 20px 0 rgba(0, 0, 0, 0.09);

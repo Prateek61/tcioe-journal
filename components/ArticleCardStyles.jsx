@@ -68,13 +68,8 @@ export const IndividualCard = styled.div`
 `;
 
 export const PDFLink = styled.a`
-  display: block;
   margin-top: 0.5rem;
-  color: #000;
+  color: #000eee;
   text-decoration: none;
   font-weight: bold;
-
-  &:hover {
-    color: #f97a00;
-  }
 `;
