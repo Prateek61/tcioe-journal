@@ -31,7 +31,6 @@ export const ArticleLists = styled.div``;
 export const IndividualCard = styled.div`
   padding: 1rem;
   text-align: justify;
-  height: 250px;
   /* Other styles for IndividualCard */
 
   p {
