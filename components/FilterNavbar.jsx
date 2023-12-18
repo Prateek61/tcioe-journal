@@ -14,26 +14,9 @@ const ContainerFull = styled.div`
 border-bottom-color: black;
 display: flex;
 margin-top: 1rem;
-border-top: 1px solid gray;
-border-bottom: 1px solid gray;
-`;
-
-const ContainerLess = styled.div`
-position: sticky;
-top: 12.3rem;
-z-index: 1;
-display: none;
-
-@media (max-width: 1000px) {
-  display: block;
-  background: white;
-  width: 91%;
-  transform: translate(5%, 0);
-}
-
-@media (max-width: 400px) {
-  top: 14.1rem;
-}
+width: 100 hw;  
+height: 4rem;
+box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.09), 0 6px 20px 0 rgba(0, 0, 0, 0.09);
 `;
 
 const DropdownContainer = styled.div`
@@ -67,7 +50,6 @@ white-space: nowrap;
 padding: 1rem 7rem;
 display: flex;
 transition: 0.5s ease-in-out;
-border-right: 1px solid gray;
 justify-content: center;
 
 
@@ -77,9 +59,10 @@ justify-content: center;
     color: white;
     transition: 0.2s ease-in-out;
     ${DropdownContent} {
-      display: block;
-      margin-top: 2rem;
-      margin-left: -2rem;
+      display: flex;
+      flex-direction: column;
+      top: 2rem;
+      left: -.3rem;
     }
 }
 
@@ -95,32 +78,10 @@ justify-content: center;
   padding: 1rem 3rem;
 }
 
-@media (max-width: 1000px) {
-  display: none;
-}
+@media (max-width: 1024px) {
+  padding: 1rem 2px;
 `;
 
-const ButtonShow = styled(DropdownContainer)`
-display: flex;
-align-items: center;
-padding: 1rem 5.29rem;
-transition: 0.5s ease-in-out;
-
-&:hover {
-    cursor: pointer;
-    background-color: black;
-    color: white;
-    transition: 0.2s ease-in-out;
-    ${DropdownContent} {
-      display: block;
-    }
-}
-
-@media (max-width: 1000px) {
-  display: block;
-  text-align: center;
-}
-`;
 
 const Icons = styled.div`
 margin-top: 1px;
@@ -134,20 +95,6 @@ const CustomLink = styled(Link)`
 const VolumeLink = styled(CustomLink)`
   display: flex;
   width: 100%;
-`;
-
-const ShowMenu = styled.div`
-font-size: 1.5rem;
-color: white;
-padding: 0 1rem;
-font-weight: bold;
-z-index: 2;
-
-@media (max-width: 1000px) {
-  position: fixed;
-  top: 2rem;
-  right: 0;
-}
 `;
 
 const FilterNavbar = ({ allArticles }) => {
@@ -211,27 +158,6 @@ const FilterNavbar = ({ allArticles }) => {
           </VolumeLink>
         ))}
       </ContainerFull>
-      <ContainerLess>
-        <ShowMenu onClick={toggleShowMenu}>
-          {showMenu.every((menu) => menu) ? <ImCross /> : <FiMenu />}
-        </ShowMenu>
-        {volumes.map((volume, index) => (
-          <ButtonShow key={volume}>
-            <CustomLink href={`/all-issues/${volume}`}>
-              Volume {volume}
-            </CustomLink>
-            <DropdownContent style={{ display: showMenu[index] ? "block" : "none" }}>
-              {issues[volume].map((issue) => (
-                <DropdownOption key={issue}>
-                  <CustomLink href={`/all-issues/${volume}/${issue}`}>
-                    Issue {issue}
-                  </CustomLink>
-                </DropdownOption>
-              ))}
-            </DropdownContent>
-          </ButtonShow>
-        ))}
-      </ContainerLess>
     </>
   );
 };
