@@ -54,7 +54,6 @@ const Page = ({ params }) => {
             return new Date(b.date_published) - new Date(a.date_published);
           })
         );
-
       } catch (error) {
         console.error("Error fetching data:", error);
       }
