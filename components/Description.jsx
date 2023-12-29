@@ -59,6 +59,7 @@ h3 {
   h3 {
     padding: 0 0.7rem;
   }
+}
 `;
 
 const List = styled.div`
